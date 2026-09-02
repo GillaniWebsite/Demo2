@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gillani Website Designer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+<style>
+  :root{
+    --ink:#12141a;
+    --ink-2:#1a1d25;
+    --paper:#ece6d9;
+    --paper-dim:#c9c2b1;
+    --brass:#c49a4e;
+    --teal:#2c5c56;
+    --rust:#a8462f;
+    --line: rgba(236,230,217,0.14);
+    --maxw: 1180px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Inter', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  ::selection{ background:var(--brass); color:var(--ink); }
+
+  a{color:inherit;}
+
+  .wrap{ max-width:var(--maxw); margin:0 auto; padding:0 32px; }
+
+  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:600; margin:0; letter-spacing:-0.01em;}
+
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--brass);
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+  .eyebrow::before{ content:''; width:22px; height:1px; background:var(--brass); display:inline-block;}
+
+  a:focus-visible, button:focus-visible{
+    outline:2px solid var(--brass);
+    outline-offset:4px;
+  }
+
+  /* ---------- NAV ---------- */
+  header.site{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(18,20,26,0.82);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:76px;
+  }
+  .mark{
+    font-family:'Fraunces', serif;
+    font-size:20px;
+    font-weight:600;
+    text-decoration:none;
+    letter-spacing:-0.01em;
+  }
+  .mark span{ color:var(--brass); }
+  .navlinks{ display:flex; gap:34px; list-style:none; margin:0; padding:0; }
+  .navlinks a{
+    text-decoration:none;
+    font-size:14px;
+    color:var(--paper-dim);
+    transition:color .25s ease;
+  }
+  .navlinks a:hover{ color:var(--paper); }
+  .nav-cta{
+    font-size:13.5px;
+    font-family:'IBM Plex Mono', monospace;
+    border:1px solid var(--paper-dim);
+    padding:9px 16px;
+    border-radius:2px;
+    text-decoration:none;
+    transition:all .25s ease;
+    white-space:nowrap;
+  }
+  .nav-cta:hover{ border-color:var(--brass); color:var(--brass); }
+  .menu-btn{ display:none; background:none; border:none; color:var(--paper); font-size:22px; cursor:pointer; }
+
+  /* ---------- HERO ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    position:relative;
+    padding-top:76px;
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse 700px 500px at 85% 15%, rgba(196,154,78,0.10), transparent 60%),
+      radial-gradient(ellipse 600px 500px at 5% 90%, rgba(44,92,86,0.16), transparent 60%);
+    pointer-events:none;
+  }
+  .hero-inner{ position:relative; z-index:2; padding:100px 0 70px; }
+  .hero-role{ margin-bottom:28px; }
+  .hero h1{
+    font-size:clamp(52px, 9vw, 128px);
+    line-height:0.94;
+    color:var(--paper);
+  }
+  .hero h1 em{ font-style:italic; font-weight:400; color:var(--brass); }
+  .sig-wrap{ margin:18px 0 34px; height:34px; }
+  .sig-wrap svg path{
+    stroke:var(--brass);
+    stroke-width:2.5;
+    fill:none;
+    stroke-dasharray:600;
+    stroke-dashoffset:600;
+    animation: draw 1.4s .5s cubic-bezier(.65,0,.35,1) forwards;
+  }
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+
+  .hero-sub{
+    max-width:520px;
+    font-size:18px;
+    color:var(--paper-dim);
+    margin-bottom:44px;
+  }
+  .hero-meta{
+    display:flex; gap:56px; flex-wrap:wrap;
+    border-top:1px solid var(--line);
+    padding-top:26px;
+  }
+  .hero-meta div{ font-size:13.5px; color:var(--paper-dim); }
+  .hero-meta strong{
+    display:block; font-family:'Fraunces', serif; font-size:26px; font-weight:500; color:var(--paper);
+    margin-bottom:4px;
+  }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{ padding:130px 0; position:relative; }
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:64px; gap:24px; flex-wrap:wrap;
+  }
+  .section-head h2{ font-size:clamp(32px,4vw,46px); }
+  .section-head p{ max-width:360px; color:var(--paper-dim); font-size:15px; margin-top:6px;}
+
+  hr.rule{ border:none; border-top:1px solid var(--line); margin:0; }
+
+  /* ---------- ABOUT ---------- */
+  #about{ background:var(--ink-2); }
+  .about-grid{
+    display:grid; grid-template-columns:1fr 1.3fr; gap:80px; align-items:start;
+  }
+  .about-grid p{ color:var(--paper-dim); font-size:16.5px; margin:0 0 20px; }
+  .about-grid p:last-child{ margin-bottom:0; }
+  .about-grid .lede{
+    font-family:'Fraunces', serif; font-size:26px; font-weight:400; color:var(--paper);
+    line-height:1.35; font-style:italic;
+  }
+  .facts{ list-style:none; margin:36px 0 0; padding:24px 0 0; border-top:1px solid var(--line); }
+  .facts li{
+    display:flex; justify-content:space-between; padding:12px 0;
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--paper-dim);
+    border-bottom:1px solid var(--line);
+  }
+  .facts li span:last-child{ color:var(--paper); text-align:right; }
+
+  /* ---------- WORK ---------- */
+  .work-list{ display:flex; flex-direction:column; }
+  .work-item{
+    display:grid; grid-template-columns:110px 1.1fr 1.4fr 140px;
+    gap:32px; align-items:center;
+    padding:36px 0;
+    border-bottom:1px solid var(--line);
+    text-decoration:none;
+    color:inherit;
+    transition:background .3s ease;
+  }
+  .work-item:first-child{ border-top:1px solid var(--line); }
+  .work-item:hover{ background:rgba(196,154,78,0.045); }
+  .work-year{ font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--paper-dim); }
+  .work-title{ font-family:'Fraunces', serif; font-size:27px; font-weight:500; transition:color .25s ease;}
+  .work-item:hover .work-title{ color:var(--brass); }
+  .work-desc{ font-size:14.5px; color:var(--paper-dim); }
+  .work-tags{ display:flex; flex-wrap:wrap; gap:8px; justify-content:flex-end; }
+  .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:0.04em;
+    color:var(--paper-dim); border:1px solid var(--line); padding:4px 9px; border-radius:20px;
+  }
+  .work-arrow{
+    display:inline-flex; width:20px; height:20px; align-items:center; justify-content:center;
+    opacity:0; transform:translateX(-6px); transition:all .25s ease;
+  }
+  .work-item:hover .work-arrow{ opacity:1; transform:translateX(0); }
+
+  /* ---------- APPROACH ---------- */
+  #approach{ background:var(--ink-2); }
+  .approach-track{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
+    background:var(--line); border:1px solid var(--line);
+  }
+  .approach-step{ background:var(--ink-2); padding:34px 28px; }
+  .approach-step .stage{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--brass); margin-bottom:18px; display:block;
+  }
+  .approach-step h3{ font-size:20px; margin-bottom:10px; font-weight:500;}
+  .approach-step p{ font-size:14px; color:var(--paper-dim); margin:0;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .quote-row{ display:grid; grid-template-columns:1fr 1fr; gap:60px; }
+  blockquote{
+    margin:0; padding:0 0 0 24px; border-left:2px solid var(--brass);
+  }
+  blockquote p{
+    font-family:'Fraunces', serif; font-size:21px; font-weight:400; font-style:italic;
+    color:var(--paper); line-height:1.5; margin:0 0 18px;
+  }
+  blockquote cite{
+    font-style:normal; font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--paper-dim);
+  }
+
+  /* ---------- CONTACT ---------- */
+  #contact{ background:var(--ink-2); text-align:left; }
+  .contact-inner{ display:flex; justify-content:space-between; align-items:flex-end; gap:40px; flex-wrap:wrap; }
+  #contact h2{ font-size:clamp(38px,6vw,74px); max-width:640px; line-height:1.02; }
+  #contact h2 em{ font-style:italic; color:var(--brass); font-weight:400; }
+  .contact-link{
+    font-family:'IBM Plex Mono', monospace; font-size:15px;
+    display:inline-flex; align-items:center; gap:10px;
+    text-decoration:none; color:var(--paper); border-bottom:1px solid var(--brass);
+    padding-bottom:4px; margin-top:34px;
+  }
+  .socials{ display:flex; gap:26px; }
+  .socials a{ font-size:13.5px; color:var(--paper-dim); text-decoration:none; }
+  .socials a:hover{ color:var(--brass); }
+
+  footer{
+    border-top:1px solid var(--line); padding:28px 0;
+    display:flex; justify-content:space-between; font-size:12.5px; color:var(--paper-dim);
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  /* ---------- REVEAL ---------- */
+  .reveal{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .reveal.is-visible{ opacity:1; transform:translateY(0); }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .reveal{ opacity:1; transform:none; transition:none; }
+    .sig-wrap svg path{ animation:none; stroke-dashoffset:0; }
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:900px){
+    .about-grid{ grid-template-columns:1fr; gap:36px; }
+    .quote-row{ grid-template-columns:1fr; gap:40px; }
+    .approach-track{ grid-template-columns:1fr 1fr; }
+    .work-item{ grid-template-columns:1fr; gap:8px; padding:26px 0; }
+    .work-tags{ justify-content:flex-start; }
+    .hero-meta{ gap:34px; }
+  }
+  @media (max-width:640px){
+    .navlinks{ display:none; }
+    .approach-track{ grid-template-columns:1fr; }
+    section{ padding:90px 0; }
+    .contact-inner{ align-items:flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <nav class="wrap">
+    <a href="#top" class="mark">Gillani Website Designer<span>.</span></a>
+    <ul class="navlinks">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#approach">Approach</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Start a project</a>
+  </nav>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div class="eyebrow">Brand &amp; Product Design Studio · Multan</div>
+      <h1>Gillani Websitse<br><em>designers&nbsp;things</em><br>that hold up.</h1>
+      <div class="sig-wrap" aria-hidden="true">
+        <svg width="260" height="34" viewBox="0 0 260 34" xmlns="http://www.w3.org/2000/svg">
+          <path d="M2 24C20 8 34 6 45 18C56 30 66 10 80 8C94 6 100 26 116 22C132 18 138 4 154 10C170 16 172 28 190 20C205 13 214 6 230 12C240 16 248 20 258 14"/>
+        </svg>
+      </div>
+      <p class="hero-sub">Ten years spent making identities, interfaces, and the occasional stubborn typeface. I work with founders who need their product to look like they meant it.</p>
+      <div class="hero-meta">
+        <div><strong>46</strong>Projects shipped</div>
+        <div><strong>11</strong>Countries worked with</div>
+        <div><strong>03</strong>Slots open — Q4 2026</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrap about-grid reveal">
+      <div>
+        <div class="eyebrow">About</div>
+        <ul class="facts">
+          <li><span>Based</span><span>Multan, Pakistan</span></li>
+          <li><span>Focus</span><span>Identity, UI, Design Systems</span></li>
+          <li><span>Available from</span><span>January 2026</span></li>
+        </ul>
+      </div>
+      <div>
+        <p class="lede">"Good design is the part nobody has to think about — because someone already did."</p>
+        <p>I'm Gillani — a designer working across brand identity and digital product. Most projects start the same way: a founder with a sharp idea and a visual language that hasn't caught up to it yet.</p>
+        <p>My job is to close that gap. Sometimes that means a new mark and a type system; sometimes it means rebuilding a product's interface from the inside out. Either way, the work has to survive contact with real use — not just look good in a deck.</p>
+        <p>I keep a small studio on purpose. Every project gets the same person from kickoff to handoff, no account layer in between.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- WORK -->
+  <section id="work">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <h2>Selected work</h2>
+        <p>A handful of the projects I can talk about publicly — more in the archive on request.</p>
+      </div>
+      <div class="work-list reveal">
+
+        <a class="work-item" href="#contact">
+          <span class="work-year">2026</span>
+          <span class="work-title">Nasheed &amp; Co.</span>
+          <span class="work-desc">Full identity and packaging system for a specialty tea roaster expanding from one shop to a national line.</span>
+          <span class="work-tags"><span class="tag">Brand</span><span class="tag">Packaging</span></span>
+        </a>
+
+        <a class="work-item" href="#contact">
+          <span class="work-year">2025</span>
+          <span class="work-title">Qafila</span>
+          <span class="work-desc">Design system and mobile UI for a logistics platform used by 4,000+ drivers across three countries.</span>
+          <span class="work-tags"><span class="tag">Product</span><span class="tag">Design System</span></span>
+        </a>
+
+       </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section id="testimonials">
+    <div class="wrap quote-row reveal">
+      <blockquote>
+        <p>Gillani rebuilt our entire visual identity in six weeks and it still looks right two years later. That's the real test.</p>
+        <cite>— Sana Tariq, Founder, Nasheed &amp; Co.</cite>
+      </blockquote>
+      <blockquote>
+        <p>Handed us a design system our engineers actually enjoyed implementing. That almost never happens.</p>
+        <cite>— Owais Farooqi, CTO, Qafila</cite>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="contact-inner reveal">
+        <div>
+          <div class="eyebrow">Get in touch</div>
+          <h2>Have a brief? <em>Let's look at it.</em></h2>
+          <a class="contact-link" href="mailto:sghazanfargillani@gmail.com">sghazanfargillani@gmail.com →</a>
+        </div>
+        <div class="socials">
+          <a href="#contact">Instagram</a>
+          <a href="#contact">LinkedIn</a>
+          <a href="#contact">Dribbble</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap" style="display:flex; justify-content:space-between; width:100%;">
+    <span>© 2026 Gillani Designer </span>
+    <span>Multan, Pakistan</span>
+    <span>0301-6638411</span>
+  </div>
+</footer>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  if('IntersectionObserver' in window){
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){ e.target.classList.add('is-visible'); io.unobserve(e.target); }
+      });
+    }, { threshold:0.15 });
+    revealEls.forEach(el=>io.observe(el));
+  } else {
+    revealEls.forEach(el=>el.classList.add('is-visible'));
+  }
+</script>
+
+</body>
+</html>
